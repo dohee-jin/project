@@ -7,7 +7,7 @@
 ### 응답(Response) 예시
 
 #### 성공 (200 OK)
-
+```
 json
 {
   "status": true,
@@ -27,6 +27,7 @@ json
     },
     "meetings": [
       {
+        "meetingId": 1,
         "title": "추리소설 읽기 모임",
         "date": "2024-08-15T19:00:00Z",
         "status": "completed", // "upcoming", "ongoing", "completed"
@@ -37,6 +38,7 @@ json
         }
       },
       {
+        "meetingId": 2,
         "title": "SF 소설 토론회",
         "date": "2024-08-20T18:00:00Z",
         "status": "upcoming",
@@ -49,7 +51,7 @@ json
     ]
   }
 }
-
+```
 #### 에러 
 * **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
 * **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
@@ -64,13 +66,14 @@ json
   - content-type: multipart/form-data
 - **request body:**
   - profileImage: 새로운 프로필 이미지 파일 (선택 사항)
-  - username: 새로운 닉네임 (선택 사항)
-  - introduction: 새로운 자기소개 (선택 사항)
-  - preferredGenres: 선호 장르 수정(선택 사항)
+  - UpdateProfileRequestDto   
+    - username: 새로운 닉네임 (선택 사항)
+    - introduction: 새로운 자기소개 (선택 사항)
+    - preferredGenres: 선호 장르 수정(선택 사항)
 - **설명:** 사용자의 프로필 정보를 수정합니다. 이미지와 텍스트 정보를 함께 처리할 수 있습니다.
 
 #### 성공 (200 OK)
-
+```
 json
 {
   "status": true,
@@ -80,10 +83,10 @@ json
     "username": "새로운닉네임",
     "profileImage": "https://example.com/profile/123_new.jpg",
     "introduction": "새로운 자기소개입니다.",
-    "preferredGenres": ["추리", "SF", "에세이"]
+    "preferredGenres": "추리"
   }
 }
-
+```
 #### 에러 
 * **400 INVAILD_INPUT**: 인증 토큰이 없거나 유효하지 않음
 * **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
