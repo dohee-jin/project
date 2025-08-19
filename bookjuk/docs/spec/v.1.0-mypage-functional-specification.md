@@ -10,13 +10,13 @@
 * 모임 목록 조회 (키워드, 정렬 등 검색 포함) (FR-C-002)
 * 모임 상세 조회 (참여자 목록, 게시판 등 포함) (FR-C-003)
 * 내가 참여한 모임 목록 (마이페이지) (FR-U-003)
-// * 모임 참석 후 후기 작성 흐름 연결 (FR-R-001)
 
 **관련 테이블:**
 
 * `meeting`
 * `meeting_participant`
 * `meeting_review`
+* `user`
 
 ---
 
@@ -45,49 +45,57 @@
 ```json
 {
   "status": true,
-  "message": "목록 조회를 성공했습니다.",
-  "timestamp": "2025-08-06T12:12:12.2987169",
-  "data": [
-    {
-      "meetingId": 1,
-      "hostId": 32,
-      "title": "밤하늘은 늘푸름 책모임",
-      "description": "직장인을 위한 저녁 시간대에 진행합니다.",
-      "bookTitle": "예술의 힘",
-      "bookAuthor": "진중권",
-      "meetingTime": "2025-08-10T19:00:00",
-      "location": "서울 강남구 역삼동",
-      "maxParticipants": 12,
-      "status": "RECRUITING",
-      "createdAt": "2025-08-5T19:00:00",
-      "updatedAt": "2025-08-5T20:00:00"
+  "message": "마이페이지 정보 조회를 성공했습니다.",
+  "timestamp": "2025-08-07T12:12:12.2987169",
+  "data": {
+    "profile": {
+      "username": "책벌레123",
+      "email": "user@example.com",
+      "profileImage": "https://example.com/profile/123.jpg",
+      "introduction": "안녕하세요! 추리소설을 좋아합니다.",
+      "preferredGenres": ["추리", "SF", "에세이"]
     },
-    {
-      "meetingId": 1,
-      "hostId": 32,
-      "title": "요즘은 핫써머 북타임",
-      "description": "더워도 다시한번 책읽어봐요",
-      "bookTitle": "코스모스",
-      "bookAuthor": "칼 세이건",
-      "meetingTime": "2025-08-10T19:00:00",
-      "location": "서울 용산구 국립중앙박물관 근처",
-      "maxParticipants": 10,
-      "status": "COMPLETED",
-      "createdAt": "2025-08-5T19:00:00",
-      "updatedAt": "2025-08-5T20:00:00"
-    }
-  ]
+    "statistics": {
+      "receivedLikes": 15,
+      "participatedMeetings": 8
+    },
+    "meetings": [
+      {
+        "meetingId": 1,
+        "title": "추리소설 읽기 모임",
+        "date": "2024-08-15T19:00:00Z",
+        "status": "completed", // "upcoming", "ongoing", "completed"
+        "role": "participant", // "host", "participant"
+        "book": {
+            "title": "셜록 홈즈",
+            "author": "아서 코난 도일"
+        }
+      },
+      {
+        "meetingId": 2,
+        "title": "SF 소설 토론회",
+        "date": "2024-08-20T18:00:00Z",
+        "status": "upcoming",
+        "role": "host",
+        "book": {
+            "title": "셜록 홈즈",
+            "author": "아서 코난 도일"
+        }
+      }
+    ]
+  }
 }
 ```
 
-#### **에러 (예시)**
+#### **에러 **
 
-* **500 Internal Server Error**
+* **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
+* **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
 
 ```json
 {
   "timestamp": "2025-08-06T16:00:15.1024654",
-  "status": 500,
+  "status": 401,
   "error": "Internal Server Error",
   "detail": "서버 오류가 발생했습니다.",
   "path": "/api/meetings"
