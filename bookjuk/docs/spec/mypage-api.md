@@ -1,7 +1,11 @@
 ## 마이페이지 정보 조회
 
 - **url:** `GET /api/mypage`
-- **request header:** 사용자 인증 토큰(JWT 토큰 인증 학습 후 내용 수정)
+- **request header:** 사용자 인증 토큰   
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <Token>"
+}
 - **설명:** 사용자의 마이페이지 전체 정보(프로필, 활동 통계, 참여한 모임 정보)를 조회합니다.
 
 ### 응답(Response) 예시
@@ -62,7 +66,11 @@ json
 
 - **url:** `PUT /api/mypage/profile`
 - **request header:** 
-  - 사용자 인증 토큰(JWT 토큰 인증 학습 후 내용 수정)
+  - 사용자 인증 토큰   
+  {
+    "Content-Type": "multipart/form-data",
+    "Authorization": "Bearer <토큰값>"
+  }
   - content-type: multipart/form-data
 - **request body:**
   - profileImage: 새로운 프로필 이미지 파일 (선택 사항)
