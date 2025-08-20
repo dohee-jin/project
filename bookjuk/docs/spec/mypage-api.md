@@ -57,7 +57,7 @@ json
 }
 ```
 #### 에러 
-* **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
+* **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
 * **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
 
 ---
@@ -97,4 +97,4 @@ json
 ```
 #### 에러 
 * **400 INVAILD_INPUT**: 인증 토큰이 없거나 유효하지 않음
-* **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
+* **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
