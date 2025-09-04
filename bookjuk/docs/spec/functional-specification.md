@@ -26,7 +26,7 @@
 
 ### **1. 개요**
 
-사용자의 개인 정보, 통계 정보, 참여 모임 정보를 확인합니다.
+사용자의 개인 정보, 통계 정보를 확인합니다.
 
 ---
 
@@ -48,7 +48,8 @@
 #### **성공 (200 OK)**
 
 
-```json
+```
+json
 {
   "status": true,
   "message": "마이페이지 정보 조회를 성공했습니다.",
@@ -64,17 +65,52 @@
     "statistics": {
       "receivedLikes": 15,
       "participatedMeetings": 8
-    },
+    }
+  }
+}
+```
+
+---
+
+### **2. 요청(Request)**
+
+* **HTTP Method:** `GET`
+- **url:** `/api/mypage/meetings`
+- **request header:** 사용자 인증 토큰   
+  {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <Token>"
+  }
+* **Query Parameters:**    
+
+| 이름   | 타입     | 기본값            | 설명                            |
+| ---- | ------ | -------------- | ----------------------------- |
+| page | number | 0              | 0-based 페이지 인덱스 (예: 0=첫 페이지)  |
+
+---
+
+### **3. 응답(Response) 예시**
+
+#### **성공 (200 OK)**
+
+
+```
+json
+{
+  "status": true,
+  "message": "마이페이지 정보 조회를 성공했습니다.",
+  "timestamp": "2025-08-07T12:12:12.2987169",
+  "data": {
     "meetings": [
       {
         "meetingId": 1,
         "title": "추리소설 읽기 모임",
         "date": "2024-08-15T19:00:00Z",
-        "status": "completed", // "upcoming", "ongoing", "completed"
-        "role": "participant", // "host", "participant"
+        "status": "completed",       // "upcoming", "ongoing", "completed"
+        "role": "participant",       // "host", "participant"
         "book": {
-            "title": "셜록 홈즈",
-            "author": "아서 코난 도일"
+          "title": "셜록 홈즈",
+          "author": "아서 코난 도일"
         }
       },
       {
@@ -84,11 +120,31 @@
         "status": "upcoming",
         "role": "host",
         "book": {
-            "title": "셜록 홈즈",
-            "author": "아서 코난 도일"
+          "title": "셜록 홈즈",
+          "author": "아서 코난 도일"
         }
       }
-    ]
+    ],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 10,
+      "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+      },
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "last": false,
+    "totalElements": 87,
+    "totalPages": 9,
+    "first": true,
+    "numberOfElements": 2,
+    "size": 10,
+    "number": 0,
+    "empty": false
   }
 }
 ```
@@ -98,7 +154,8 @@
 * **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
 * **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
 
-```json
+```
+json
 {
   "timestamp": "2025-08-06T16:00:15.1024654",
   "status": 404,
@@ -144,7 +201,8 @@
 #### **성공 (200 OK)**
 
 
-```json
+```
+json
 {
   "status": true,
   "message": "마이페이지 정보 수정을 성공했습니다.",
@@ -163,7 +221,8 @@
 * **400 INVAILD_INPUT**: 인증 토큰이 없거나 유효하지 않음
 * **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
 
-```json
+```
+json
 {
   "timestamp": "2025-08-06T16:00:15.1024654",
   "status": 404,
@@ -206,7 +265,8 @@
 #### **성공 (200 OK)**
 
 
-```json
+```
+json
 {
   "status": true,
   "message": "다른 사용자에게 리뷰 남기기를 성공했습니다.",
@@ -229,7 +289,8 @@
 * **401 Unauthorized Error**: 인증 토큰이 없거나 유효하지 않음
 * **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
 
-```json
+```
+json
 {
   "timestamp": "2025-08-06T16:00:15.1024654",
   "status": 400,

@@ -6,7 +6,7 @@
   "Content-Type": "application/json",
   "Authorization": "Bearer <Token>"
 }
-- **설명:** 사용자의 마이페이지 전체 정보(프로필, 활동 통계, 참여한 모임 정보)를 조회합니다.
+- **설명:** 사용자의 마이페이지 프로필, 활동 통계 정보를 조회합니다.
 
 ### 응답(Response) 예시
 
@@ -28,17 +28,52 @@ json
     "statistics": {
       "receivedLikes": 15,
       "participatedMeetings": 8
-    },
+    }
+  }
+}
+```
+#### 에러 
+* **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
+* **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
+
+---
+
+## 마이페이지 참여 모임 정보 조회
+
+- **url:** `GET /api/mypage/meetings`
+- **request header:** 사용자 인증 토큰   
+  {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer <Token>"
+  }
+- **query parameter:**   
+
+| 이름   | 타입     | 기본값            | 설명                            |
+| ---- | ------ | -------------- | ----------------------------- |
+| page | number | 0              | 0-based 페이지 인덱스 (예: 0=첫 페이지)  |
+
+- **설명:** 사용자의 마이페이지 참여 모임 정보를 조회합니다.
+
+### 응답(Response) 예시
+
+#### 성공 (200 OK)
+```
+json
+{
+  "status": true,
+  "message": "마이페이지 정보 조회를 성공했습니다.",
+  "timestamp": "2025-08-07T12:12:12.2987169",
+  "data": {
     "meetings": [
       {
         "meetingId": 1,
         "title": "추리소설 읽기 모임",
         "date": "2024-08-15T19:00:00Z",
-        "status": "completed", // "upcoming", "ongoing", "completed"
-        "role": "participant", // "host", "participant"
+        "status": "completed",       // "upcoming", "ongoing", "completed"
+        "role": "participant",       // "host", "participant"
         "book": {
-            "title": "셜록 홈즈",
-            "author": "아서 코난 도일"
+          "title": "셜록 홈즈",
+          "author": "아서 코난 도일"
         }
       },
       {
@@ -48,15 +83,35 @@ json
         "status": "upcoming",
         "role": "host",
         "book": {
-            "title": "셜록 홈즈",
-            "author": "아서 코난 도일"
+          "title": "셜록 홈즈",
+          "author": "아서 코난 도일"
         }
       }
-    ]
+    ],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 10,
+      "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+      },
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "last": false,
+    "totalElements": 87,
+    "totalPages": 9,
+    "first": true,
+    "numberOfElements": 2,
+    "size": 10,
+    "number": 0,
+    "empty": false
   }
 }
 ```
-#### 에러 
+#### 에러
 * **401 UNAUTHORIZED**: 인증 토큰이 없거나 유효하지 않음
 * **404 USER_NOT_FOUND**: 사용자를 찾을 수 없음
 
