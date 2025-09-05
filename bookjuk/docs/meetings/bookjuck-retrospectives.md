@@ -1,194 +1,41 @@
-# 📅 2025-08-04 ~ 2025-08-21 북적북적 프로젝트 전체 회고
+# 📖 북적북적(BookJuk) 프로젝트 최종 회고
 
-> **북적북적(BookJuk)** 프로젝트 전체 회고
+## 🚀 프로젝트를 마치며
+이번 프로젝트는 **마이페이지와 좋아요 기능**을 중심으로, 백엔드와 프론트엔드 전 과정을 아우르는 경험이었다.  
+프로젝트 주제 선정, 요구사항 명세서 작성, ERD와 데이터베이스 설계, API 명세서, 백엔드 구현, 프론트엔드 구현, 그리고 발표 문서 작성까지 전 과정을 경험하면서 하나의 서비스가 완성되는 흐름을 몸소 느낄 수 있었다.
 
-## 🧭 오늘 논의한 주요 내용
+## 💡 배운 점
+1. **기술적인 성장**
+    - JPA, QueryDSL, Spring Boot를 활용해 실제 서비스 수준의 기능을 구현했다.
+    - DTO 분리, 계층별 책임 분리, 예외 처리 등 구조적인 코드를 작성하는 방법을 배웠다.
+    - 프론트엔드에서는 JavaScript를 활용한 데이터 렌더링, 이벤트 위임, 파일 업로드 처리, 페이징 처리 등을 직접 구현하며 서비스 동작 흐름을 이해할 수 있었다.
 
-* 마이페이지 프로필 정보 수정 기능 구현을 위한 dto, 비즈니스 로직, api controller 작성
+2. **협업과 소통**
+    - 지난 프로젝트와 달리 팀원 개개인이 맡은 기능을 **유기적으로 연결**해야 했기 때문에, 협업의 중요성을 크게 체감했다.
+    - 단순히 코드를 나누어 짜는 것이 아니라, 서로의 작업물이 맞물려 하나의 기능이 되도록 설계하고 조율하는 과정이 필요했다.
+    - 문서화(요구사항 명세서, API 명세서, ERD)가 얼마나 협업에 큰 도움이 되는지도 알게 되었다.
 
-## 🚩 내일 작업할 내용
+3. **문제 해결 능력**
+    - 단순히 기능 구현만이 아니라, **문제가 발생했을 때 원인을 분석하고 해결책을 찾는 과정**이 중요했다.
+    - 예를 들어, 프로필 수정 시 기본 이미지로 되돌아가지 않는 문제나 인증 정보 때문에 테스트가 막히는 문제 등을 겪으면서, 백엔드와 프론트엔드 모두에서 개선할 수 있는 방법을 찾았다.
+    - 버그를 단순히 수정하는 것을 넘어, **재발 방지와 사용자 경험 개선**까지 고려하는 습관이 생겼다.
 
-* 마이페이지 프론트엔드 구현
----
+## 😅 아쉬운 점
+- 이미지 업로드 기능에서 사용자별 경로 매핑을 구현하지 못한 점이 아쉽다. 향후 보안과 관리 측면에서 반드시 개선해야 할 부분이다.
+- 프로젝트 초반에는 주제 선정과 요구사항 정리에서 많은 시간을 소요했다. 미리 기획안을 더 구체화했다면 개발에 더 많은 시간을 쓸 수 있었을 것이다.
+- 인증 기능이 추가되면서 테스트가 막히는 경험을 했다. 테스트 환경과 데이터 설계도 기능 구현만큼 중요하다는 사실을 다시금 깨달았다.
 
-## ✅ 마이페이지 프로필 정보 수정 백엔드 기능 구현
-마이페이지 프로필 정보 수정은 이미지와 수정된 내용을 받아와서 db에 저장해야 되기때문에   
-수정한 내용을 받아오는 dto를 작성했다. 유저네임, 프로필이미지, 선호장르, 자기소개를 입력받을 수 있고   
-유저네임은 필수값이지만 수정하지 않고 기존 유저네임을 사용할 수 있다.   
-유저네임 검증은 프론트에서 진행하고 dto 에서는 있는 경우에 한해서 값을 받도록 작성했다.   
-유저네임을 제외한 다른 입력값들은 null 상태도 받을 수 있게 만들었다.
-```
-dto
-public class UpdateProfileRequest {
+## 🌱 앞으로의 다짐
+이번 프로젝트는 단순히 기능 구현 능력을 넘어서, **팀 프로젝트에서 필요한 전반적인 역량(기획–설계–구현–테스트–발표)**을 기를 수 있는 소중한 경험이었다.  
+앞으로는 이번 경험을 바탕으로:
+- 더 정교한 문서화와 설계를 통해 협업 효율을 높이고,
+- 테스트 환경까지 고려한 개발 습관을 만들고,
+- 사용자 경험을 먼저 생각하는 기능 구현을 해내고 싶다.
 
-    @Size(max = 50, message = "닉네임은 50자를 초과할 수 없습니다.")
-    private String username;
+무엇보다도, 이번 프로젝트를 통해 얻은 가장 큰 성장은 **“혼자서는 절대 완성할 수 없는 것을, 함께라면 만들어낼 수 있다”**는 깨달음이었다.  
+이 교훈을 잊지 않고, 앞으로의 개발 여정에서도 팀워크와 협업을 가장 큰 자산으로 삼고 싶다.
 
-    @Nullable
-    private String profileImage;
 
-    @Nullable
-    private String preferredGenre;
 
-    @Nullable
-    private String introduction;
-
-}
-```
-User 엔터티에 편의 메소드 추가하여 수정된 내용을 유저객체에 반영할 수 있게 만들었다.   
-원래 유저객체는 토큰을 통해 알아온 email로 유저객체를 가져온다. 가져온 유저객체의
-편의 메소드 updateProfile을 사용하여 새로 입력된 프로필 수정 내용을 반영할 수 있게 했다.
-username 의 경우 엔터티 생성시 nullable=false로 선언하여 null을 받을 수 없게 하고   
-프론트 단에서도 한 번 더 검증하도록 구현했다.
-```
-// 프로필 수정 편의 메소드
-    public void updateProfile(UpdateProfileRequest request, String profileImage) {
-        this.username = request.getUsername();
-        this.introduction = request.getIntroduction();
-        this.preferredGenre = request.getPreferredGenre();
-
-        // 이미지 URL 이 null 이 아닌 경우에만 업데이트
-        if (profileImage != null) {
-            this.profileImage = profileImage;
-        }
-    }
-```
-Service 에서는 이미지 업로드 처리를 위해서 localFileService 를 주입받았다.   
-MultipartFile로 파일을 받은 뒤 img 파일인지 검증하고 이미지 파일이 맞으면   
-이미지를 업로드하고 Strong으로 저장위치 url를 반환한다.   
-업로드한 파일이 없으면 localFileService에서 null을 반환하는데   
-url를 리턴받는 newImage가 null이면(업로드한 프로필이미지가 없음) 디폴트 이미지를 사용할 수 있도록   
-if 로 기본프로필 저장 위치를 저장하게했다.    
-service 단에서 null 처리를 해주고 있어 user 엔터티 편의메소드에서 이미지 null 처리는 필요없어보이나   
-한 번더 검증할 수 있도록 삭제하지 않고 유지하기로 했다.
-```
-service
-public UpdateProfileResponse updateProfile(UpdateProfileRequest request, String email, MultipartFile file) {
-
-        // 1. 사용자 정보로 유저 정보 가져오기
-        User user = getUserByEmail(email);
-
-        // 2. 프로필 이미지 업로드
-        String newImage = null;
-
-        if (file != null && !file.isEmpty()) {
-
-            try {
-                // 이미지 파일이 아닌 것은 스킵
-                if (file.getContentType() == null || !file.getContentType().startsWith("image/")) {
-                    throw new CustomException();
-                }
-                newImage = localFileService.uploadFile(file);
-                log.info("이미지 업로드 성공: {}", newImage);
-
-            } catch (Exception e) {
-                log.error("이미지 업로드 실패: {}", e.getMessage());
-                throw new CustomException(ErrorCode.FILE_SIZE_EXCEEDED);
-            }
-        }
-
-        // 3. 유저 객체에 정보 수정
-        if(newImage == null) {
-            newImage = "/images/defaultProfile.png";
-        }
-        user.updateProfile(request, newImage);
-
-        // 4. 수정된 유저정보 업데이트
-        User updatedUser = userRepository.save(user);
-        return UpdateProfileResponse.from(updatedUser);
-
-    }
-
-localFileService
-public class LocalFileService implements FileService{
-
-    // application.yml에 설정한 'file.upload.location' 값을 자동으로 주입받습니다.
-    @Value("${file.upload.location}")
-    private String uploadPath;
-
-    @Override
-    public String uploadFile(MultipartFile file) throws IOException {
-        // 1. 파일이 전송되지 않았거나 비어있는 경우 null을 반환합니다.
-        if (file == null || file.isEmpty()) {
-            return null;
-        }
-
-        // 2. 업로드 경로에 해당하는 디렉터리가 존재하지 않으면 생성합니다.
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            boolean created = uploadDir.mkdirs();
-            log.info("업로드 디렉터리 생성: {}, 성공 여부: {}", uploadPath, created);
-        }
-
-        // 3. 파일명 중복을 방지하기 위해 고유한 파일명을 생성합니다. (UUID 사용)
-        String originalFilename = file.getOriginalFilename();
-        String storedFileName = createStoredFileName(originalFilename);
-
-        // 4. 최종 저장 경로와 파일명을 합쳐 파일을 서버에 저장합니다.
-        File destination = new File(uploadPath, storedFileName);
-        file.transferTo(destination);
-        log.info("파일 저장 성공: {}", destination.getAbsolutePath());
-
-        // 5. 웹에서 이 파일에 접근할 때 사용할 URL 경로를 반환합니다.
-        //    (WebConfig 설정이 이 경로를 실제 파일 위치와 매핑해줍니다.)
-        return "/uploads/" + storedFileName;
-    }
-
-    // 원본 파일명에서 확장자를 추출합니다.
-    private String extractExtension(String originalFilename) {
-        try {
-            int pos = originalFilename.lastIndexOf(".");
-            return originalFilename.substring(pos + 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            // 확장자가 없는 파일의 경우 처리
-            return "";
-        }
-    }
-
-    // 서버에 저장될 고유한 파일명을 생성합니다. (예: a4e6-8b1e-11e9.png)
-    private String createStoredFileName(String originalFilename) {
-        String uuid = UUID.randomUUID().toString();
-        String extension = extractExtension(originalFilename);
-        return uuid + "." + extension;
-    }
-
-}
-```
-api controller에서는 이미지, json 등 여러타입을 파라미터로 받아야 해서 기존에 Post 요청에서 사용하던   
-RequsetBody 대신 RequsetPart를 사용했다.   
-하나의 API에서 여러 타입의 데이터를 보내려면 multipart/form-data를 사용한다.   
-@RequestPart는 multipart/form-data 요청에서 특정 part를 매핑해주며,   
-@RequestPart(name="…")의 name에는 클라이언트가 보낼 때 사용하는 key 값을 작성한다.
-
-아래 코드에서처럼 profile과 imageFile 두 가지 이름을 사용하면,
-- profile → JSON으로 변환되어 DTO로 처리
-- imageFile → 파일로 처리 (MultipartFile)
-
-multipart/form-data와 RequsetPart를 사용하면 한 요청 안에서 JSON과 파일을 동시에 받을 수 있다.
-```
-@PutMapping("/profile")
-    @ResponseBody
-    public ResponseEntity<?> updateProfile(
-            @RequestPart("profile") @Valid UpdateProfileRequest request
-            ,@AuthenticationPrincipal String email
-            ,@RequestPart(value = "imageFile", required = false) MultipartFile imageFile
-            ) {
-
-        UpdateProfileResponse response = myPageService.updateProfile(request, email, imageFile);
-        log.info("사용자 정보 수정 완료: {}", response.getUsername());
-        return ResponseEntity.ok(ApiResponse.success("프로필이 수정되었습니다", response));
-    }
-```
-postman으로 api 테스트를 진행했고 목표에 맞게 기능이 구현됨을 확인했다.
-
----
-
-## 💭 8/16~17 일 회고
-이미지 처리가 생각보다 까다로웠다. Postman으로 테스트할 때 Content-Type을 application/json으로 지정해야 했는데   
-이를 계속 description란에 잘못 작성하는 바람에 오류가 반복적으로 발생하는 실수를 했다.   
-또 아쉬웠던 점은 학원에서 진행했던 토이 프로젝트에서는 이미지 파일 저장 경로를 username별로 구분하도록 구현했는데   
-이번에는 그 부분을 생략한 채 단순히 업로드 기능만 구현했다.   
-사용자별 경로 매핑을 적용하지 못한 부분이 아쉬웠다.   
-다음 프로젝트에서 이미지 업로드를 구현할 때에는 반드시 user별 경로 매핑을 적용해보고 싶다. 
 
 
